@@ -13,7 +13,7 @@ library(tidyverse)
 
 ```{r}
 # Load data
-snow_survey <- read_csv(here("data/processed/snow_cover.csv"))
+snow_survey <- read_csv(here::here("data/processed/snow_cover.csv"))
 ```
 
 Replace unknown characters or values that do not meet the assumptions of the data with NA.
@@ -45,12 +45,62 @@ snow_survey <- snow_survey |>
 ```{r}
 # Clean Land_cover column
 snow_survey <- snow_survey |>
-  mutate(Total_cover = ifelse(Land_cover == "-", NA, Land_cover),
-         Total_cover = ifelse(Land_cover == ".", NA, Land_cover),
-         Total_cover = ifelse(Land_cover == "unk", NA, Land_cover),
-         Total_cover = ifelse(Land_cover == "n/a", NA, Land_cover))
+  mutate(Total_cover = ifelse(Total_cover == "-", NA, Total_cover),
+         Total_cover = ifelse(Total_cover == ".", NA, Total_cover),
+         Total_cover = ifelse(Total_cover == "unk", NA, Total_cover),
+         Total_cover = ifelse(Total_cover == "n/a", NA, Total_cover),
+         Total_cover = as.numeric(Total_cover))
+```
+
+Check the number of NAs for each column
+```{r}
+print(colSums(is.na(snow_survey)))
+```
+
+For this next section I impute values for a given Land, Water, Snow, or Total cover columns if all of the other columns have a value. If there is an NA in more than one column I drop it because I'm not confident enough in the remaining values on their own.
+```{r}
+# --- Impute values where one of the columns is missing ----
+snow_survey <- snow_survey |>
+  mutate(
+
+    # Impute missing Snow_cover
+    Snow_cover = ifelse(
+      is.na(Snow_cover) & !is.na(Land_cover) & !is.na(Water_cover) & !is.na(Total_cover),
+      Total_cover - Land_cover - Water_cover,
+      Snow_cover
+    ),
+
+    # Impute missing Land_cover
+    Land_cover = ifelse(
+      is.na(Land_cover) & !is.na(Snow_cover) & !is.na(Water_cover) & !is.na(Total_cover),
+      Total_cover - Snow_cover - Water_cover,
+      Land_cover
+    ),
+
+    # Impute missing Water_cover
+    Water_cover = ifelse(
+      is.na(Water_cover) & !is.na(Snow_cover) & !is.na(Land_cover) & !is.na(Total_cover),
+      Total_cover - Snow_cover - Land_cover,
+      Water_cover
+    ),
+
+    # Recalculate Total_cover where there are no missing values
+    Total_cover = ifelse(
+      !is.na(Snow_cover) & !is.na(Land_cover) & !is.na(Water_cover),
+      Snow_cover + Land_cover + Water_cover,
+      Total_cover
+    )
+  )
+
+# Drop rows with an NA value
+snow_survey <- snow_survey |>
+  filter(rowSums(is.na(across(c(Snow_cover, Land_cover, Water_cover)))) <= 1)
+
+```
+
+```{r}
+print(colSums(is.na(snow_survey)))
 ```
 
 
-```
 
