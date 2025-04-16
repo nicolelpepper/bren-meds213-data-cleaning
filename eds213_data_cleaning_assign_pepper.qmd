@@ -1,0 +1,56 @@
+---
+title: "eds213_data_cleaning_assign_pepper"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Load libraries
+library(here)
+library(tidyverse)
+```
+
+```{r}
+# Load data
+snow_survey <- read_csv(here("data/processed/snow_cover.csv"))
+```
+
+Replace unknown characters or values that do not meet the assumptions of the data with NA.
+```{r}
+# Clean observations in Water_cover column
+snow_survey <- snow_survey |>
+  mutate(Water_cover = ifelse(Water_cover == "-", NA, Water_cover),
+         Water_cover = ifelse(Water_cover == ".", NA, Water_cover),
+         Water_cover = ifelse(Water_cover == "unk", NA, Water_cover),
+         Water_cover = ifelse(Water_cover == "n/a", NA, Water_cover))
+
+# Convert Water_cover to numeric
+snow_survey <- snow_survey |>
+  mutate(Water_cover = as.numeric(Water_cover))
+```
+
+```{r}
+# Clean Land_cover column
+snow_survey <- snow_survey |>
+  mutate(Land_cover = ifelse(Land_cover == "-", NA, Land_cover),
+         Land_cover = ifelse(Land_cover == ".", NA, Land_cover),
+         Land_cover = ifelse(Land_cover == "unk", NA, Land_cover),
+         Land_cover = ifelse(Land_cover == "n/a", NA, Land_cover),
+         Land_cover = as.numeric(Land_cover),
+         Land_cover = ifelse(Land_cover > 100, NA, Land_cover),
+         Land_cover = ifelse(Land_cover < 0, NA, Land_cover))
+```
+
+```{r}
+# Clean Land_cover column
+snow_survey <- snow_survey |>
+  mutate(Total_cover = ifelse(Land_cover == "-", NA, Land_cover),
+         Total_cover = ifelse(Land_cover == ".", NA, Land_cover),
+         Total_cover = ifelse(Land_cover == "unk", NA, Land_cover),
+         Total_cover = ifelse(Land_cover == "n/a", NA, Land_cover))
+```
+
+
+```
+
