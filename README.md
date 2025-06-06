@@ -1,5 +1,9 @@
-# Cleaning the shorebird survey data 
+*UCSB MEDS* - *EDS 213 - Database Management*
 
+# Cleaning the shorebird survey data 
+![Database Management](https://img.shields.io/badge/Database_Managements-cornflowerblue?style=for-the-badge&logo=R) ![UCSB MEDS](https://img.shields.io/badge/UCSB%20MEDS-yellow?style=for-the-badge) 
+
+**Author:** Nicole Pepper
 
 ## The data set
 
@@ -47,8 +51,46 @@ data
 └──  └── species_presence.csv
 ```
 
-Additional Related Data:
-Additional data from the ASDN can be found at [this link](https://arcticdata.io/catalog/view/doi:10.18739/A2222R68W).
+### Additional Related Data:
+Additional data from the ASDN can be found on the NSF Arctic Data Center at [this link](https://arcticdata.io/catalog/view/doi:10.18739/A2222R68W).
 
-Data Versions:
+### Data Versions:
+This data was accessed and forked from a GitHub repo by the UCSB Library Research Data Services at [this link](https://github.com/UCSB-Library-Research-Data-Services/bren-meds213-data-cleaning).
 
+### Data Specific Information:
+##### `all_cover_fixed_pepper.csv` a cleaned version of the ASDN datasets:
+- Number of variables: 11
+- Number of cases/rows: 42,829
+- Missing data code: NA, NAs were given to all values where total cover didn't add up to 100%
+- Variable list:
+  
+| Variable      | Description                                                | Type                 |
+|---------------|------------------------------------------------------------|----------------------|
+| Site          | Four-letter unique code of site where data was collected   | string               |
+| Year          | Year that data was collected                               | integer              |
+| Date          | Date that data was collected                               | date                 |
+| Plot          | Name of study plot where data was collected                | string               |
+| Location      | Name of dedicated snow-survey location     | string               |
+| Snow_cover    | Percent cover of snow cover                    | integer              |
+| Water_cover   | Percent cover of water water                                     | integer              |
+| Land_cover    | Percent cover of exposed land                              | integer              |
+| Total_cover   | Sum of the three cover columns - sums to 100%.  | integer              |
+| Observer      | Name of person who conducted the survey                        | string               |
+| Notes         | Futher comments on the survey                        | string              |
+
+### Sharing & Access Information:
+
+##### License: [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
+Please acknowledge this dataset and the authors in any analysis, publication, presentation, or other output that uses these data. If you use the full dataset, we suggest you cite it as:
+
+##### How to Cite Data:
+Lanctot, RB, SC Brown, and BK Sandercock. 2016. Arctic Shorebird Demographics Network. NSF Arctic Data Center. doi: [https://arcticdata.io/catalog/view/doi:10.18739/A2222R68W](https://arcticdata.io/catalog/view/doi:10.18739/A2222R68W).
+
+If you use data from only one or a few sites, we suggest you cite data for each site as per this example, using the corresponding site PIs as the authors:
+Lanctot, R.B. and Saalfeld, S.T. 2016. Barrow, 2014. Arctic Shorebird Demographics Network. NSF Arctic Data Center. [Insert site-specific DOI here]
+
+[Link to specific dois](https://arcticdata.io/catalog)
+
+
+
+  
