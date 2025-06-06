@@ -17,3 +17,38 @@ Data on climatic conditions, prey abundance, and predators were also collected. 
 
 See `01_ASDN_Readme.txt` provided in the [course data repository](https://github.com/UCSB-Library-Research-Data-Services/bren-meds213-spring-2024-class-data) for full metadata information about this data set.
 
+## Data & File Overview
+
+### File list:
+The data used for this is stored in a folder `data` that is broken into subfolders `raw/` for raw data and `processed/` for processed data.
+
+The `raw/` folder contains:
+
+- `01_ASDN_Readme.txt` a read me file for the Artic Shorebird Demographics Network (ASDN) data
+- `ASDN_Daily_species.csv` raw data from ASDN containing a record of the species (birds and mammals) encountered during field work each day at each site.
+- `ASDN_Snow_survey.csv` raw data from ASDN containing periodic records of snow cover remaining at the sites.
+The `processed/` folder contains cleaned version of the ASDN datasets.
+- `all_cover_fixed_pepper.csv` a cleaned version of the ASDN datasets
+- `snow_cover.csv` a cleaned version of the ASDN snow cover dataset filtered to the snow_cover column.
+- `species_presence.csv` a cleaned version of the ASDN daily species dataset
+
+The file organization is as follows:
+```
+data
+|
+├── raw/
+│    ├── 01_ASDN_Readme.txt
+│    ├── ASDN_Daily_species.csv
+│    └── ASDN_Snow_survey.csv
+│
+├── processed/
+│    ├── all_cover_fixed_pepper.csv
+│    ├── snow_cover.csv 
+└──  └── species_presence.csv
+```
+
+Additional Related Data:
+
+
+Data Versions:
+
