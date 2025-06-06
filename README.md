@@ -48,7 +48,7 @@ data
 ```
 
 Additional Related Data:
-
+Additional data from the ASDN can be found at [this link](https://arcticdata.io/catalog/view/doi:10.18739/A2222R68W).
 
 Data Versions:
 
